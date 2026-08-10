@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="十三支：四人比牌、手牌排列成前中後三墩。純前端 Playgrounds SAM，適配手機與桌面。"
+    />
+    <title>十三支</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <h1>十三支</h1>
+        <p class="tagline">四人比牌 · 排列三墩 · 純娛樂</p>
+      </header>
+
+      <section class="meter" aria-label="對局狀態">
+        <div class="meter-item">
+          <span class="label">回合</span>
+          <strong id="turn-label">—</strong>
+        </div>
+        <div class="meter-item">
+          <span class="label">得分</span>
+          <strong id="score-label">—</strong>
+        </div>
+        <div class="meter-actions">
+          <button type="button" id="btn-mute" class="secondary" aria-pressed="true">
+            音效開
+          </button>
+        </div>
+      </section>
+
+      <div class="controls">
+        <button type="button" id="btn-deal">開局</button>
+        <button type="button" id="btn-reset" class="secondary">重來</button>
+      </div>
+
+      <p id="status" class="status" role="status">點「開局」發牌。</p>
+
+      <section class="table" aria-label="牌桌">
+        <div class="opponents">
+          <div class="seat seat-ai" data-seat="1">
+            <div class="seat-meta">
+              <span class="seat-name" id="name-1">小梅</span>
+              <span class="rowlabel" id="rows-1">—</span>
+            </div>
+            <p class="seat-play" id="score-1"></p>
+            <div class="seat-cards" id="op-1" aria-hidden="true"></div>
+          </div>
+          <div class="seat seat-ai" data-seat="2">
+            <div class="seat-meta">
+              <span class="seat-name" id="name-2">阿心</span>
+              <span class="rowlabel" id="rows-2">—</span>
+            </div>
+            <p class="seat-play" id="score-2"></p>
+            <div class="seat-cards" id="op-2" aria-hidden="true"></div>
+          </div>
+          <div class="seat seat-ai" data-seat="3">
+            <div class="seat-meta">
+              <span class="seat-name" id="name-3">黑哥</span>
+              <span class="rowlabel" id="rows-3">—</span>
+            </div>
+            <p class="seat-play" id="score-3"></p>
+            <div class="seat-cards" id="op-3" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <!-- Player rows: 前 / 中 / 後 -->
+        <div class="player" aria-label="你的手牌排列">
+          <div class="row row-front" data-row="front">
+            <span class="row-tag">前</span>
+            <div class="row-cards" id="row-front"></div>
+          </div>
+          <div class="row row-middle" data-row="middle">
+            <span class="row-tag">中</span>
+            <div class="row-cards" id="row-middle"></div>
+          </div>
+          <div class="row row-back" data-row="back">
+            <span class="row-tag">後</span>
+            <div class="row-cards" id="row-back"></div>
+          </div>
+        </div>
+
+        <!-- Card pool to arrange from -->
+        <div class="hand" id="hand" role="listbox" aria-label="未排列手牌" aria-multiselectable="true"></div>
+      </section>
+
+      <div class="action-bar">
+        <button type="button" id="btn-arrange" class="primary" disabled>確認排列</button>
+        <button type="button" id="btn-auto" class="secondary" disabled>自動排列</button>
+        <button type="button" id="btn-clear" class="secondary" disabled>清空</button>
+      </div>
+
+      <details class="rules">
+        <summary>規則摘要</summary>
+        <ul>
+          <li>每人 13 張，排成 前墩 3 張、中墩 5 張、後墩 5 張。</li>
+          <li>牌力 2 最小、A 最大；花色 ♦ &lt; ♣ &lt; ♥ &lt; ♠。</li>
+          <li>牌型：散牌 &lt; 對子 &lt; 兩對 &lt; 三條 &lt; 順子 &lt; 同花 &lt; 葫蘆 &lt; 鐵支 &lt; 同花順。</li>
+          <li>三墩須「前 &lt; 中 &lt; 後」（前墩最弱），否則算「倒墩」。</li>
+          <li>逐墩與其他三人比大小，每贏一墩 +1 分；先排好者自由調度。</li>
+        </ul>
+      </details>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

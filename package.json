@@ -1,0 +1,14 @@
+{
+  "name": "pg-shisan",
+  "version": "0.1.0",
+  "description": "十三支：四人比牌、手牌排列成前中後三墩。純前端 Playgrounds SAM。",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "jsdom": "^30.0.1",
+    "vitest": "^4.1.10"
+  }
+}
